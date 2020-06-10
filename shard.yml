@@ -1,0 +1,13 @@
+name: cycling
+version: 0.1.0
+
+authors:
+  - Konstantine <konstantinev@protonmail.com>
+
+targets:
+  cycling:
+    main: src/cycling.cr
+
+crystal: 0.34.0
+
+license: MIT
