@@ -1,29 +1,16 @@
-require "option_parser"
 require "csv"
+require "./cycling/**"
 
 module Cycling
-  VERSION = "0.1.5"
-  @@data      : String = "data.csv"
+  VERSION = "0.2.1"
 
-  # Option Flags to select different options for things
-  OptionParser.parse do |parser|
-    parser.banner = "Usage: cycling [arguments]"
-    parser.on("-o", "--output", "Output the data to I/O for use in other programs"){puts "Not Available yet..."}
-    parser.on("-h", "--help", "Show this help") do
-      puts parser
-      exit
-    end
-    # If flag unknown show help but show error
-    parser.invalid_option do |flag|
-      STDERR.puts "ERROR: #{flag} is not a valid option."
-      STDERR.puts parser
-      exit(1)
-    end
-  end
+  # Initializing
+  Cycling::Options
+  ENV["file"] ||= "./data.csv"
 
   # Create a new file if once doesn't exist
   def self.create_file()
-    File.touch(@@data) # Create new file
+    File.touch(ENV["file"]) # Create new file
     # Create Header Row
     first_row = CSV.build do |csv|
       csv.row "Date",
@@ -35,11 +22,11 @@ module Cycling
               "Cadence",
               "Comments"
     end
-    File.write(@@data, first_row) # Write to file
+    File.write(ENV["file"], first_row) # Write to file
   end
 
   # Check if data file exist or create it
-  File.exists?(@@data) ? true : Cycling.create_file()
+  File.exists?(ENV["file"]) ? true : Cycling.create_file()
 
   # Create new row of test data
   def self.build_file()
@@ -75,9 +62,9 @@ module Cycling
       csv.row d1,d2,d3,d4,d5,d6,d7,d8
     end
     # Write data to file
-    File.write(@@data, result, mode: "a")
+    File.write(ENV["file"], result, mode: "a")
   end
   Cycling.build_file()
   # Some Text to know it all worked.
-  puts "Success: Data written to #{@@data}."
+  puts "Success: Data written to #{ENV["file"]}."
 end

@@ -24,10 +24,24 @@ I wanted it to be simple and not get in the way, so simply running `cycling` sho
 $ cycling
 ```
 
+### Changing File Output
+If you want the program to create a new file in a particular place within your filesystem specify it with the `-f` flag
+``` sh
+$ cycling -f <new file>
+```
+or
+``` sh
+$ cycling --file <new file>
+```
+
 ### Getting Help
 The program accepts flags, use `-h` to read about them.
 ``` sh
 $ cycling -h
+```
+or
+``` sh
+$ cycling --help
 ```
 
 ### Other Flags
