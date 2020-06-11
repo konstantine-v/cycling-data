@@ -1,20 +1,37 @@
 # Cycling Data
-
-Consume Cycling data from rides then parse said data into csv file for use with other programs.
+Consume Cycling data from rides then parse said data into CSV file for use with other programs.
 
 Cycles -> Records Ride Data (time, distance, etc) -> 
 
-## Installation
+This was created as a tool to solve my simple problem of entering cycling and training data offline and quickly without fuss on any device that can run a terminal emulator.
 
-TODO: Write installation instructions here
+## Installation
+To install the program run use the crystal compiler to handle it.
+``` sh
+$ crystal build src/cycling.cr --release
+```
+
+You can optionally use Cake in the directory to compile. Cake is a version of a Makefile specifically for Crystal projects.
+``` sh
+$ cake
+```
+
+If you're not familiar with building programs in Crystal or want to know more refer to the [using the compiler section of the crystal docs](https://crystal-lang.org/reference/using_the_compiler/#crystal-build).
 
 ## Usage
 
-TODO: Write usage instructions here
+``` sh
+$ cycling
+```
 
+## Getting Help
+The program accepts flags, use `-h` to read about them.
+``` sh
+$ cycling -h
+```
 ## Development
-
-TODO: Write development instructions here
+No shard dependencies used, but make sure your version of crystal is up to date.
+All development happens in the `src/` directory.
 
 ## Contributing
 
