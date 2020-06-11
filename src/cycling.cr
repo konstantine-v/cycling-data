@@ -2,12 +2,22 @@ require "option_parser"
 require "csv"
 
 module Cycling
-  VERSION = "0.1.2"
+  VERSION = "0.1.3"
 
-  # Notes
-  # Currently just works as a test version, it does the very very basic functions.
-  # TODO: Break out into components
-  # TODO: Have OptionParser create flags for use in the application.
+  # Option Flags to select different options for things
+  OptionParser.parse do |parser|
+    parser.banner = "Usage: cycling [arguments]"
+    parser.on("-o", "--output", "Output the data to I/O for use in other programs"){puts "Not Available yet..."}
+    parser.on("-h", "--help", "Show this help") do
+      puts parser
+      exit
+    end
+    parser.invalid_option do |flag|
+      STDERR.puts "ERROR: #{flag} is not a valid option."
+      STDERR.puts parser
+      exit(1)
+    end
+  end
 
   # Set the data file
   @@data_date : Int32   = 0
@@ -18,11 +28,11 @@ module Cycling
   @@data_ahrt : Int32   = 0
   @@data_cadn : Float64 = 0
   @@data_comm : String = ""
-  data = "data.csv"
+  @@data      : String = "data.csv"
 
   # Create a new file if once doesn't exist
-  def self.create_file(data)
-    File.touch(data) # Create new file
+  def self.create_file()
+    File.touch(@@data) # Create new file
 
     # Create Header Row
     first_row = CSV.build do |csv|
@@ -36,11 +46,11 @@ module Cycling
               "Comments"
     end
 
-    File.write(data, first_row) # Write to file
+    File.write(@@data, first_row) # Write to file
   end
 
   # Check if data file exist or create it
-  File.exists?(data) ? true : Cycling.create_file(data)
+  File.exists?(@@data) ? true : Cycling.create_file()
 
   # Create new row of test data
   def self.build_file()
@@ -73,22 +83,23 @@ module Cycling
     @@data_ahrt = d6.nil? ? 0   : d6
     @@data_cadn = d7.nil? ? 0.0 : d7
     @@data_comm = d8.nil? ? ""  : d8
+
+    result = CSV.build do |csv|
+      csv.row @@data_date,
+      @@data_dist,
+      @@data_time,
+      @@data_avgs,
+      @@data_maxs,
+      @@data_ahrt,
+      @@data_cadn,
+      @@data_comm
+    end
+
+    # Write data to file
+    File.write(@@data, result, mode: "a")
   end
 
   Cycling.build_file()
-  result = CSV.build do |csv|
-    csv.row @@data_date,
-            @@data_dist,
-            @@data_time,
-            @@data_avgs,
-            @@data_maxs,
-            @@data_ahrt,
-            @@data_cadn,
-            @@data_comm
-  end
-  # Write data to file
-  File.write(data, result, mode: "a")
-
   # Some Text to know it all worked.
-  puts "Success: Data written to #{data}."
+  puts "Success: Data written to #{@@data}."
 end
