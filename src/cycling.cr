@@ -2,7 +2,7 @@ require "option_parser"
 require "csv"
 
 module Cycling
-  VERSION = "0.1.4"
+  VERSION = "0.1.5"
   @@data      : String = "data.csv"
 
   # Option Flags to select different options for things
@@ -53,11 +53,11 @@ module Cycling
     print "Enter Time (Enter as Seconds):"
     d3 = read_line
     # d4 will be set below in the conversions
-    print "Enter Max Speed (mph or kmph):"
+    print "Enter Max Speed (MPH or KPH):"
     d5 = read_line
     print "Enter Average Heart Rate:"
     d6 = read_line
-    print "Enter Average Cadence (rmp):"
+    print "Enter Average Cadence (RPMs):"
     d7 = read_line
     print "Enter Comments:"
     d8 = read_line
