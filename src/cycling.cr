@@ -45,18 +45,15 @@ module Cycling
   def self.build_file()
     # Prompt user for info
     puts "Enter your ride details..."
-    puts "Fields are optional, just press enter to skip"
+    puts "Fields are optional, just press ENTER to skip"
     print "Enter Date (YYYYMMDD):"
     d1 = read_line
-    pp d1
-    print d1
     print "Enter Distance (Miles or Kilometers):"
     d2 = read_line
-    puts d2
     print "Enter Time (Enter as Seconds):"
     d3 = read_line
     # d4 will be set below in the conversions
-    print "Enter Max Speed (mph/kmph):"
+    print "Enter Max Speed (mph or kmph):"
     d5 = read_line
     print "Enter Average Heart Rate:"
     d6 = read_line
@@ -64,7 +61,6 @@ module Cycling
     d7 = read_line
     print "Enter Comments:"
     d8 = read_line
-
     # Convert to nil to save on data size
     d1 = d1.empty? ? nil : d1.chomp.to_i
     d2 = d2.empty? ? nil : d2.chomp.to_f32
@@ -73,12 +69,11 @@ module Cycling
     d5 = d5.empty? ? nil : d5.chomp.to_f32
     d6 = d6.empty? ? nil : d6.chomp.to_i16
     d7 = d7.empty? ? nil : d7.chomp.to_f32
-    d7 = d7.empty? ? nil : d7.chomp
-
+    d8 = d8.empty? ? nil : d8.chomp
+    # Build CSV Row
     result = CSV.build do |csv|
       csv.row d1,d2,d3,d4,d5,d6,d7,d8
     end
-
     # Write data to file
     File.write(@@data, result, mode: "a")
   end
