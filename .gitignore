@@ -3,5 +3,5 @@
 /bin/
 /.shards/
 *.dwarf
+*.csv
 cycling
-data.csv
