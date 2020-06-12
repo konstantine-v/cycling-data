@@ -9,27 +9,27 @@ module Cycling
   ENV["file"] ||= "./data.csv"
 
   # Create a new file if once doesn't exist
-  def self.create_file()
+  def self.create_file
     File.touch(ENV["file"]) # Create new file
     # Create Header Row
     first_row = CSV.build do |csv|
       csv.row "Date",
-              "Distance",
-              "Time",
-              "Average Speed",
-              "Maximum Speed",
-              "Average Heart Rate",
-              "Cadence",
-              "Comments"
+        "Distance",
+        "Time",
+        "Average Speed",
+        "Maximum Speed",
+        "Average Heart Rate",
+        "Cadence",
+        "Comments"
     end
     File.write(ENV["file"], first_row) # Write to file
   end
 
   # Check if data file exist or create it
-  File.exists?(ENV["file"]) ? true : Cycling.create_file()
+  File.exists?(ENV["file"]) ? true : Cycling.create_file
 
   # Create new row of test data
-  def self.build_file()
+  def self.build_file
     # Prompt user for info
     puts "Enter your ride details..."
     puts "Fields are optional, just press ENTER to skip"
@@ -59,12 +59,13 @@ module Cycling
     d8 = d8.empty? ? nil : d8.chomp
     # Build CSV Row
     result = CSV.build do |csv|
-      csv.row d1,d2,d3,d4,d5,d6,d7,d8
+      csv.row d1, d2, d3, d4, d5, d6, d7, d8
     end
     # Write data to file
     File.write(ENV["file"], result, mode: "a")
   end
-  Cycling.build_file()
+
+  Cycling.build_file
   # Some Text to know it all worked.
   puts "Success: Data written to #{ENV["file"]}."
 end
