@@ -11,12 +11,15 @@ class Cycling::Options
       exit
     end
 
-    # Specifiy the file you wish to save data to as opposed to data.csv
+    p.on("-v", "--version", "Prints Version of program to terminal") do
+      puts VERSION
+      exit
+    end
+
     p.on("-f PATH", "--file PATH", "Choose file to write to") do |new_path|
       ENV["file"] = new_path.empty? ? "data.csv" : new_path
     end
 
-    # For importing AAT GPX file
     p.on("-a FILE", "--aat FILE", "Put path to AAT data file to input") do |aat_file|
       # if aat_file.empty?
       #   raise "File Needs to be specified... Please try again..."
@@ -25,7 +28,6 @@ class Cycling::Options
       exit
     end
 
-    # Get help for this program
     p.on("-h", "--help", "Show this help") do
       puts p
       exit

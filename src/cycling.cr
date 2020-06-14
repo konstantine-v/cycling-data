@@ -2,7 +2,7 @@ require "csv"
 require "./cycling/**"
 
 module Cycling
-  VERSION = "0.3.1"
+  VERSION = "0.3.2"
 
   # Initializing
   Cycling::Options
