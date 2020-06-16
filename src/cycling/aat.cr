@@ -16,7 +16,7 @@ class Cycling::AAT
     a = Math.sin(dlat_rad/2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad/2)**2
     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
 
-    rm * c # Delta in meters
+    rm * c # Return distance in meters
   end
 
   def self.import(file_name)
@@ -38,18 +38,18 @@ class Cycling::AAT
 
     dist_arr = Array(Float64|Int64).new
     (0..(aat_arr.size-1)).each do |m|
-      # (m = 5) ? exit : nil
-      if m != 5
+      if m != aat_arr.size-1
         dist_arr << Cycling::AAT.distance([aat_arr[m][0].to_f64, aat_arr[m][1].to_f64],[aat_arr[m+1][0].to_f64, aat_arr[m+1][1].to_f64])
       else
       end
     end
 
     fin_date = aat_arr[0][-1].to_s.gsub(/T.*/im,"").gsub('-',"")
-    fin_dist = (dist_arr.sum*1000).to_i
+    fin_dist = dist_arr.sum.to_i
     # TODO: Calculate avg speed
     # puts (aat_arr[0][-1].to_s.gsub(/.*T/im,"").gsub(".000Z","").to_i)
     # ( aat_arr[-1][-1].to_s.gsub(/T.*/im,"").gsub('-',""))
+
     ENV["file"] ||= "./data.csv"
     File.exists?(ENV["file"]) ? true : Cycling.create_file
     Cycling.build_file(fin_date, fin_dist, nil, nil, nil, nil, nil, nil)

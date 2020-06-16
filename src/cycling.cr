@@ -2,7 +2,7 @@ require "csv"
 require "./cycling/**"
 
 module Cycling
-  VERSION = "0.3.3"
+  VERSION = "0.3.4"
 
   # Initializing
   Cycling::Options
@@ -45,6 +45,7 @@ module Cycling
   d7 = read_line
   print "Enter Comments:"
   d8 = read_line
+
   # Convert to nil to save on data size
   d1 = d1.empty? ? nil : d1.chomp.to_i
   d2 = d2.empty? ? nil : d2.chomp.to_f32
@@ -63,10 +64,7 @@ module Cycling
       csv.row d1, d2, d3, d4, d5, d6, d7, d8
     end
 
-    # Write data to file
     File.write(ENV["file"], result, mode: "a")
-
-    # Some Text to know it all worked.
     puts "Success: Data written to #{ENV["file"]}."
   end
 
