@@ -32,12 +32,12 @@ module Cycling
   puts "Fields are optional, just press ENTER to skip"
   print "Enter Date (YYYYMMDD):"
   d1 = read_line
-  print "Enter Distance (Miles or Kilometers):"
+  print "Enter Distance (Kilometers):"
   d2 = read_line
   print "Enter Time (Enter as Seconds):"
   d3 = read_line
   # d4 will be set below in the conversions
-  print "Enter Max Speed (MPH or KPH):"
+  print "Enter Max Speed (KPH):"
   d5 = read_line
   print "Enter Average Heart Rate:"
   d6 = read_line
@@ -58,7 +58,6 @@ module Cycling
 
   # Create new row of test data
   def self.build_file(d1, d2, d3, d4, d5, d6, d7, d8)
-    # Prompt user for info
     # Build CSV Row
     result = CSV.build do |csv|
       csv.row d1, d2, d3, d4, d5, d6, d7, d8
