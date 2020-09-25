@@ -4,4 +4,4 @@
 /.shards/
 *.dwarf
 *.csv
-./cycling
+/cycling
