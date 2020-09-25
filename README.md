@@ -11,9 +11,11 @@ To install the program run use the crystal compiler to handle it.
 $ crystal build src/cycling.cr --release
 ```
 
-You can optionally use Cake in the directory to compile. Cake is a version of a Makefile specifically for Crystal projects.
+~~You can optionally use Cake in the directory to compile. Cake is a version of a Makefile specifically for Crystal projects.~~
+
+Just use `make` as it's consistant and doesn't require any 3rd party binary.
 ``` sh
-$ cake
+$ make
 ```
 
 If you're not familiar with building programs in Crystal or want to know more refer to the [using the compiler section of the crystal docs](https://crystal-lang.org/reference/using_the_compiler/#crystal-build).
